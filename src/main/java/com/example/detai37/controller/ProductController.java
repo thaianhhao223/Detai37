@@ -16,7 +16,6 @@ public class ProductController {
 
     public ProductController(ProductService productService) {
         this.productService = productService;
-
     }
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public ResponseEntity<Page<Product>> getAllProduct(@RequestBody BasePageAndSortRequest pageAndSortRequest){

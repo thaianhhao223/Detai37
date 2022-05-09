@@ -2,10 +2,7 @@ package com.example.detai37.entity;
 
 import lombok.*;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,6 +14,7 @@ import java.util.List;
 public class Product {
     @Id
     private String id;
+    @Column(columnDefinition = "NVarchar(255)")
     private String name;
     private Integer size;
     private Integer stock; //Số lượng tồn
