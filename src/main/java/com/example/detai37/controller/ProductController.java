@@ -2,17 +2,12 @@ package com.example.detai37.controller;
 
 import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Product;
-import com.example.detai37.entity.ProductType;
 import com.example.detai37.request.product.CreateProductRequest;
 import com.example.detai37.request.product.UpdateProductRequest;
 import com.example.detai37.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-
-import javax.xml.ws.Response;
-import java.util.List;
 
 @RestController
 @RequestMapping("product")
