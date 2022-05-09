@@ -24,7 +24,7 @@ public class Bill {
     private List<ProductSale> productList;
     private Date dateSale;
     private Date dateDelivery;
-    private Long totalPrice;
+    private Double totalPrice;
     private Float percentDiscount;
 
     private String paymentType;

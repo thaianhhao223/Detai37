@@ -1,7 +1,5 @@
 package com.example.detai37.request.cart;
 
-import com.example.detai37.entity.Customer;
-import com.example.detai37.model.ProductSale;
 import com.example.detai37.model.ProductSaleId;
 import lombok.*;
 
@@ -13,7 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-public class CreateCartRequest {
+public class UpdateCartRequest {
     private String customerId;
     private List<ProductSaleId> productSale;
 }

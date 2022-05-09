@@ -13,7 +13,7 @@ public class UpdateProductRequest {
     private String name;
     private Integer size;
     private Integer stock; //Số lượng tồn
-    private Long price;
+    private Double price;
     private Float percentDiscount;
     private String typeId;
     private String brandId;

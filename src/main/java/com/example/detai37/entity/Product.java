@@ -16,9 +16,11 @@ public class Product {
     private String id;
     @Column(columnDefinition = "NVarchar(255)")
     private String name;
+    @Column(columnDefinition = "ntext")
+    private String description;
     private Integer size;
     private Integer stock; //Số lượng tồn
-    private Long price;
+    private Double price;
     private Float percentDiscount;
     @ManyToOne
     private ProductType type;

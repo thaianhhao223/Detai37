@@ -20,6 +20,6 @@ public class Cart {
     private Customer customer;
     @ElementCollection
     private List<ProductSale> productList;
-    private Long totalPrice;
+    private Double totalPrice;
     private Float percentDiscount;
 }
