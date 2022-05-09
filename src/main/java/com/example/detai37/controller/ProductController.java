@@ -1,6 +1,7 @@
 package com.example.detai37.controller;
 
 import com.example.detai37.entity.Product;
+import com.example.detai37.entity.ProductType;
 import com.example.detai37.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,16 +22,13 @@ public class ProductController {
         this.productService = productService;
 
     }
-
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
-    public List<Product> getAllProduct(){
-        List<Product> result = productService.getAllProduct();
-        return result;
+    public ResponseEntity<List<Product>> getAllProduct(){
+        return ResponseEntity.ok(productService.getAllProduct());
     }
 
-    @RequestMapping(value = "/find-by-id", method = RequestMethod.GET)
-    public ResponseEntity<Product>  getAllProduct(@PathVariable String productId){
-        Product result = productService.findProductById(productId);
-        return ResponseEntity.ok(result);
+    @RequestMapping(value = "/find-by-id/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Product> findProductById(@PathVariable String productId){
+        return ResponseEntity.ok(productService.findProductById(productId));
     }
 }
