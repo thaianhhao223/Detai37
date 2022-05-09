@@ -1,12 +1,19 @@
 package com.example.detai37.controller;
 
+import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Customer;
+import com.example.detai37.entity.SaleStaff;
 import com.example.detai37.request.customer.CreateCustomerRequest;
+import com.example.detai37.request.customer.UpdateCustomerRequest;
+import com.example.detai37.request.customer.UpdateStatusCustomerRequest;
+import com.example.detai37.request.salestaff.UpdateSaleStaffRequest;
+import com.example.detai37.request.salestaff.UpdateStatusSaleStaffRequest;
 import com.example.detai37.service.CustomerService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.detai37.service.SaleStaffService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -14,21 +21,29 @@ import java.util.List;
 @RequestMapping("salestaffs")
 public class SaleStaffController {
 
-//    private CustomerService customerService;
-//
-//    public SaleStaffController(CustomerService customerService) {
-//        this.customerService = customerService;
-//    }
-//
-//    @RequestMapping(value = "/salestaff", method = RequestMethod.GET)
-//    public List<Customer> getAllCustomer(){
-//        List<Customer> result = customerService.getAllCustommer();
-//        return result;
-//    }
-//
-//    @RequestMapping(value = "/salestaff", method = RequestMethod.POST)
-//    public Customer saveANewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
-//        Customer result = customerService.saveCustomer(createCustomerRequest);
-//        return result;
-//    }
+    private SaleStaffService saleStaffService;
+    public SaleStaffController(SaleStaffService saleStaffService ) {
+        this.saleStaffService = saleStaffService;
+    }
+
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET)
+    public ResponseEntity<Page<SaleStaff>> getAllSaleStaff(@RequestBody BasePageAndSortRequest pageAndSortRequest){
+        return ResponseEntity.ok(saleStaffService.getAllSaleStaff(pageAndSortRequest));
+    }
+
+    @RequestMapping(value = "/find-by-id/{id}", method = RequestMethod.POST)
+    public ResponseEntity<SaleStaff> saveSaleStaff(@PathVariable("id") String saleStaffId){
+        return ResponseEntity.ok(saleStaffService.findSaleStaffById(saleStaffId));
+    }
+
+    @RequestMapping(value = "/update-sale-staff", method = RequestMethod.POST)
+    public ResponseEntity<SaleStaff> updateSaleStaff(@RequestBody UpdateSaleStaffRequest updateSaleStaffRequest){
+        return ResponseEntity.ok(saleStaffService.updateSaleStaff(updateSaleStaffRequest));
+    }
+
+
+    @RequestMapping(value = "/update-sale-staff-status", method = RequestMethod.PUT)
+    public ResponseEntity<SaleStaff> updateStatusCustomer(@RequestBody UpdateStatusSaleStaffRequest updateStatusSaleStaffRequest){
+        return ResponseEntity.ok(saleStaffService.updateStatusSaleStaff(updateStatusSaleStaffRequest));
+    }
 }

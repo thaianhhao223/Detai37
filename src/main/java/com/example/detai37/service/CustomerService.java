@@ -1,5 +1,6 @@
 package com.example.detai37.service;
 
+import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.base.request.BaseSort;
 import com.example.detai37.common.CustomerStatus;
 import com.example.detai37.entity.Customer;
@@ -25,8 +26,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Page<Customer> getAllCustommer(){
-        Pageable pageable = PageableUtils.convertPageableAndSort(0,10,null);
+    public Page<Customer> getAllCustommer(BasePageAndSortRequest pageAndSortRequest){
+        Pageable pageable = PageableUtils.convertPageableAndSort(pageAndSortRequest.getPageNumber(), pageAndSortRequest.getPageSize(), pageAndSortRequest.getSort());
         Page<Customer> customerList = customerRepository.findAll(pageable);
 //        List<Customer> customerList = customerRepository.findAll();
         return customerList;

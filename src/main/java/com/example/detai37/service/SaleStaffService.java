@@ -1,5 +1,6 @@
 package com.example.detai37.service;
 
+import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.common.SaleStaffStatus;
 import com.example.detai37.entity.Customer;
 import com.example.detai37.entity.SaleStaff;
@@ -11,6 +12,9 @@ import com.example.detai37.request.salestaff.CreateSaleStaffRequest;
 import com.example.detai37.request.salestaff.UpdateSaleStaffRequest;
 import com.example.detai37.request.salestaff.UpdateStatusSaleStaffRequest;
 import com.example.detai37.ultis.MappingUtils;
+import com.example.detai37.ultis.PageableUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +29,10 @@ public class SaleStaffService {
         this.saleStaffRepository = saleStaffRepository;
     }
 
-    public List<SaleStaff> getAllSaleStaff(){
-        List<SaleStaff> saleStaffList = saleStaffRepository.findAll();
+    public Page<SaleStaff> getAllSaleStaff(BasePageAndSortRequest pageAndSortRequest){
+        Pageable pageable = PageableUtils.convertPageableAndSort(pageAndSortRequest.getPageNumber(), pageAndSortRequest.getPageSize(), pageAndSortRequest.getSort());
+        Page<SaleStaff> saleStaffList = saleStaffRepository.findAll(pageable);
+//        List<SaleStaff> saleStaffList = saleStaffRepository.findAll();
         return saleStaffList;
     }
 

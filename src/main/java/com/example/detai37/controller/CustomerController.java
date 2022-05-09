@@ -1,5 +1,6 @@
 package com.example.detai37.controller;
 
+import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Customer;
 import com.example.detai37.request.customer.CreateCustomerRequest;
 import com.example.detai37.request.customer.UpdateCustomerRequest;
@@ -22,8 +23,8 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public ResponseEntity<Page<Customer>> getAllCustomer(){
-        return ResponseEntity.ok(customerService.getAllCustommer());
+    public ResponseEntity<Page<Customer>> getAllCustomer(@RequestBody BasePageAndSortRequest pageAndSortRequest){
+        return ResponseEntity.ok(customerService.getAllCustommer(pageAndSortRequest));
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
