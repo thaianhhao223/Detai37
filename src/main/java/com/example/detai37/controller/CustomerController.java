@@ -30,7 +30,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.saveCustomer(createCustomerRequest));
     }
 
-    @GetMapping("/customer/{id}")
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
     public ResponseEntity<Customer> findById(@PathVariable String id) {
         return ResponseEntity.ok(customerService.findCustomerById(id));
     }
