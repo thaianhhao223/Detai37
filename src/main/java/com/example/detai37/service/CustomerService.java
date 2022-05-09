@@ -1,5 +1,6 @@
 package com.example.detai37.service;
 
+import com.example.detai37.base.request.BaseSort;
 import com.example.detai37.common.CustomerStatus;
 import com.example.detai37.entity.Customer;
 import com.example.detai37.repository.CustomerRepository;
@@ -7,6 +8,9 @@ import com.example.detai37.request.customer.CreateCustomerRequest;
 import com.example.detai37.request.customer.UpdateCustomerRequest;
 import com.example.detai37.request.customer.UpdateStatusCustomerRequest;
 import com.example.detai37.ultis.MappingUtils;
+import com.example.detai37.ultis.PageableUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +25,10 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> getAllCustommer(){
-        List<Customer> customerList = customerRepository.findAll();
+    public Page<Customer> getAllCustommer(){
+        Pageable pageable = PageableUtils.convertPageableAndSort(0,10,null);
+        Page<Customer> customerList = customerRepository.findAll(pageable);
+//        List<Customer> customerList = customerRepository.findAll();
         return customerList;
     }
 

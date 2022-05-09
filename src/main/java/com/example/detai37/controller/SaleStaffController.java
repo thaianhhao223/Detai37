@@ -14,21 +14,21 @@ import java.util.List;
 @RequestMapping("salestaffs")
 public class SaleStaffController {
 
-    private CustomerService customerService;
-
-    public SaleStaffController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
-
-    @RequestMapping(value = "/salestaff", method = RequestMethod.GET)
-    public List<Customer> getAllCustomer(){
-        List<Customer> result = customerService.getAllCustommer();
-        return result;
-    }
-
-    @RequestMapping(value = "/salestaff", method = RequestMethod.POST)
-    public Customer saveANewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
-        Customer result = customerService.saveCustomer(createCustomerRequest);
-        return result;
-    }
+//    private CustomerService customerService;
+//
+//    public SaleStaffController(CustomerService customerService) {
+//        this.customerService = customerService;
+//    }
+//
+//    @RequestMapping(value = "/salestaff", method = RequestMethod.GET)
+//    public List<Customer> getAllCustomer(){
+//        List<Customer> result = customerService.getAllCustommer();
+//        return result;
+//    }
+//
+//    @RequestMapping(value = "/salestaff", method = RequestMethod.POST)
+//    public Customer saveANewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
+//        Customer result = customerService.saveCustomer(createCustomerRequest);
+//        return result;
+//    }
 }

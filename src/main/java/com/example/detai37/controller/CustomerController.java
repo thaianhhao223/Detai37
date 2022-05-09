@@ -5,6 +5,7 @@ import com.example.detai37.request.customer.CreateCustomerRequest;
 import com.example.detai37.request.customer.UpdateCustomerRequest;
 import com.example.detai37.request.customer.UpdateStatusCustomerRequest;
 import com.example.detai37.service.CustomerService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public ResponseEntity<List<Customer>> getAllCustomer(){
+    public ResponseEntity<Page<Customer>> getAllCustomer(){
         return ResponseEntity.ok(customerService.getAllCustommer());
     }
 
