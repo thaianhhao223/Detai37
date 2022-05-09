@@ -1,12 +1,18 @@
 package com.example.detai37.service;
 
+import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Product;
 import com.example.detai37.entity.ProductBrand;
 import com.example.detai37.entity.ProductType;
 import com.example.detai37.repository.ProductRepository;
 import com.example.detai37.request.product.CreateProductRequest;
+import com.example.detai37.request.product.UpdateProductRequest;
 import com.example.detai37.ultis.MappingUtils;
+import com.example.detai37.ultis.PageableUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +28,9 @@ public class ProductService {
         this.productTypeService = productTypeService;
     }
 
-    public List<Product> getAllProduct(){
-        List<Product> productList = productRepository.findAll();
+    public Page<Product> getAllProduct(BasePageAndSortRequest pageAndSortRequest){
+        Pageable pageable = PageableUtils.convertPageableAndSort(pageAndSortRequest.getPageNumber(), pageAndSortRequest.getPageSize(), pageAndSortRequest.getSort());
+        Page<Product> productList = productRepository.findAll(pageable);
         return productList;
     }
 
@@ -52,4 +59,21 @@ public class ProductService {
         return result;
 //        return customer;
     }
+
+    public Product updateProduct( UpdateProductRequest updateProductRequest){
+        Product product = MappingUtils.mapObject(updateProductRequest, Product.class);
+        if(product.getStock() > 0){
+            product.setStatus(true);
+        }else {
+            product.setStatus(false);
+        }
+        ProductBrand productBrand = productBrandService.findProductBrandById(updateProductRequest.getBrandId());
+        ProductType productType = productTypeService.findProductTypeById(updateProductRequest.getTypeId());
+        product.setBrand(productBrand);
+        product.setType(productType);
+        Product result = productRepository.save(product);
+        return result;
+//        return customer;
+    }
+
 }
