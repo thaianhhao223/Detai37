@@ -5,10 +5,8 @@ import com.example.detai37.request.customer.CreateCustomerRequest;
 import com.example.detai37.request.customer.UpdateCustomerRequest;
 import com.example.detai37.request.customer.UpdateStatusCustomerRequest;
 import com.example.detai37.service.CustomerService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,15 +21,18 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public List<Customer> getAllCustomer(){
-        List<Customer> result = customerService.getAllCustommer();
-        return result;
+    public ResponseEntity<List<Customer>> getAllCustomer(){
+        return ResponseEntity.ok(customerService.getAllCustommer());
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    public Customer saveANewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
-        Customer result = customerService.saveCustomer(createCustomerRequest);
-        return result;
+    public ResponseEntity<Customer> saveANewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest){
+        return ResponseEntity.ok(customerService.saveCustomer(createCustomerRequest));
+    }
+
+    @GetMapping("/customer/{id}")
+    public ResponseEntity<Customer> findById(@PathVariable String id) {
+        return ResponseEntity.ok(customerService.findCustomerById(id));
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.PUT)
