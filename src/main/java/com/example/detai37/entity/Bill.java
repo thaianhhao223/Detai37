@@ -18,6 +18,8 @@ public class Bill {
     private String id;
     @ManyToOne
     private Customer customer;
+    @ManyToOne
+    private SaleStaff saleStaff;
     @ElementCollection
     private List<ProductSale> productList;
     private Date dateSale;
