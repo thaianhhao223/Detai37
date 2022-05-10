@@ -3,6 +3,8 @@ package com.example.detai37.request.bill;
 import com.example.detai37.model.ProductSaleId;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +14,13 @@ import java.util.List;
 @Getter
 @Builder
 public class SolvePaymentBillRequest {
+    @NotBlank
+    @NotNull
     private String billId;
+    @NotBlank
+    @NotNull
     private String paymentType;
+
+    @NotNull
     private Boolean isSolvePayment;
 }

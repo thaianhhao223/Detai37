@@ -6,6 +6,9 @@ import lombok.*;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,12 +17,24 @@ import java.util.List;
 @Getter
 @Builder
 public class CreateProductRequest {
+    @NotBlank
+    @NotNull
     private String name;
+    @NotNull
+    @Size(min = 0)
     private Integer size;
+    @NotNull
+    @Size(min = 0)
     private Integer stock; //Số lượng tồn
+    @NotNull
+    @Size(min = 0)
     private Double price;
+    @NotNull
+    @Size(min = 0)
     private Float percentDiscount;
+    @NotNull
     private String typeId;
+    @NotNull
     private String brandId;
     private String urlImageThumnail;
     private List<String> listImageDetail;
