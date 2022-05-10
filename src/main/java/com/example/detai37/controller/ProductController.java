@@ -4,6 +4,7 @@ import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Product;
 import com.example.detai37.request.product.CreateProductRequest;
 import com.example.detai37.request.product.UpdateProductRequest;
+import com.example.detai37.response.ProductPageResponse;
 import com.example.detai37.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,13 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    @RequestMapping(value = "/get-all", method = RequestMethod.GET)
-    public ResponseEntity<Page<Product>> getAllProduct(@RequestBody BasePageAndSortRequest pageAndSortRequest){
-        return ResponseEntity.ok(productService.getAllProduct(pageAndSortRequest));
+    @RequestMapping(value = "/get-all", method = RequestMethod.POST)
+    public ResponseEntity<ProductPageResponse> getAllProduct(@RequestBody BasePageAndSortRequest pageAndSortRequest){
+        return ResponseEntity.ok(new ProductPageResponse(productService.getAllProduct(pageAndSortRequest).getContent()));
     }
 
     @RequestMapping(value = "/find-by-id/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Product> findProductById(@PathVariable String productId){
+    public ResponseEntity<Product> findProductById(@PathVariable("id") String productId){
         return ResponseEntity.ok(productService.findProductById(productId));
     }
 
