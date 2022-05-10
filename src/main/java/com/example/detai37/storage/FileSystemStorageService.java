@@ -1,5 +1,6 @@
 package com.example.detai37.storage;
 
+import com.sun.javafx.binding.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -33,7 +34,18 @@ public class FileSystemStorageService implements StorageService{
                 throw new StorageException("Failed to store empty file.");
             }
             Random random = new Random();
-            String expandName = String.valueOf(random.nextInt(1000));
+            Integer numberRand = random.nextInt(1000000);
+//            String expandName = String.format("%8s",numberRand);
+            String expandName = "";
+            if(numberRand.toString().length() < 8){
+                expandName += numberRand.toString();
+                for(int i =0; i < 8 - numberRand.toString().length();i++ ){
+                    expandName="0"+expandName;
+                }
+            } else {
+                expandName += numberRand.toString().length();
+            }
+
 
             Path destinationFile = this.rootLocation.resolve(
                             Paths.get(expandName+file.getOriginalFilename()))
