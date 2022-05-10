@@ -67,7 +67,8 @@ public class CartService {
 
     public Cart updateCart(UpdateCartRequest updateCartRequest){
 //        Cart cart = MappingUtils.mapObject(createCartRequest, Cart.class);
-        Cart cart = new Cart();
+//        Cart cart = new Cart();
+        Cart cart = cartRepository.getById(updateCartRequest.getCartId());
         Customer customer = customerService.findCustomerById(updateCartRequest.getCustomerId());
         List<ProductSale> productList = new ArrayList<>();
         for(ProductSaleId productId: updateCartRequest.getProductSale()){

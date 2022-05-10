@@ -7,6 +7,7 @@ import com.example.detai37.entity.ProductType;
 import com.example.detai37.repository.ProductRepository;
 import com.example.detai37.request.product.CreateProductRequest;
 import com.example.detai37.request.product.UpdateProductRequest;
+import com.example.detai37.request.product.UpdateStockProductRequest;
 import com.example.detai37.ultis.MappingUtils;
 import com.example.detai37.ultis.PageableUtils;
 import org.springframework.data.domain.Page;
@@ -74,4 +75,17 @@ public class ProductService {
 //        return customer;
     }
 
+    public Product updateStockProduct( UpdateStockProductRequest updateStockProductRequest){
+        Product product = productRepository.getById(updateStockProductRequest.getProductId());
+        Integer stock = product.getStock() - updateStockProductRequest.getStockHadSolve();
+        product.setStock(stock);
+        if(product.getStock() > 0){
+            product.setStatus(true);
+        }else {
+            product.setStatus(false);
+        }
+        Product result = productRepository.save(product);
+        return result;
+//        return customer;
+    }
 }

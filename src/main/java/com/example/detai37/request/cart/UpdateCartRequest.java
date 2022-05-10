@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Builder
 public class UpdateCartRequest {
+    private String cartId;
     private String customerId;
     private List<ProductSaleId> productSale;
 }
