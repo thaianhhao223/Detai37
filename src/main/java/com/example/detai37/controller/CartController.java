@@ -27,7 +27,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "/find-by-id/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Cart> findCartById(@PathVariable String cartId){
+    public ResponseEntity<Cart> findCartById(@PathVariable("id") String cartId){
         return ResponseEntity.ok(cartService.findCartById(cartId));
     }
 

@@ -2,6 +2,7 @@ package com.example.detai37.controller;
 
 import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Bill;
+import com.example.detai37.entity.Product;
 import com.example.detai37.entity.ProductBrand;
 import com.example.detai37.request.bill.CreateBillRequest;
 import com.example.detai37.request.bill.SolvePaymentBillRequest;
@@ -11,6 +12,7 @@ import com.example.detai37.service.BillService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +36,11 @@ public class BillController {
     @RequestMapping(value = "/get-all-with-page", method = RequestMethod.GET)
     public ResponseEntity<Page<Bill>> getAllBillWithPage(@RequestBody BasePageAndSortRequest pageAndSortRequest){
         return ResponseEntity.ok(billService.getAllBillWithPage(pageAndSortRequest));
+    }
+
+    @RequestMapping(value = "/find-by-id/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Bill> findProductById(@PathVariable("id") String billId){
+        return ResponseEntity.ok(billService.findBillById(billId));
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

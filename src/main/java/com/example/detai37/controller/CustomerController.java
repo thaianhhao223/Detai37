@@ -33,7 +33,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Customer> findById(@PathVariable String id) {
+    public ResponseEntity<Customer> findById(@PathVariable("id") String id) {
         return ResponseEntity.ok(customerService.findCustomerById(id));
     }
 

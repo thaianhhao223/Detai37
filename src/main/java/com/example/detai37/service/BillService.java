@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BillService {
@@ -43,6 +44,16 @@ public class BillService {
     public List<Bill> getAllBill(){
         List<Bill> list = billRepository.findAll();
         return list;
+    }
+
+    public Bill findBillById(String id){
+
+        Optional<Bill> billOptional = billRepository.findById(id);
+        Bill bill  = new Bill();
+        if (billOptional != null){
+            bill = billOptional.get();
+        }
+        return bill;
     }
 
     public Bill saveBill(CreateBillRequest createBillRequest){
