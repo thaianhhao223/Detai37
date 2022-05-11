@@ -32,6 +32,11 @@ public class SaleStaffController {
         return ResponseEntity.ok(saleStaffService.getAllSaleStaff(pageAndSortRequest));
     }
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<List<SaleStaff>> getAllSaleStaff(){
+        return ResponseEntity.ok(saleStaffService.getAllSaleStaff());
+    }
+
     @RequestMapping(value = "/find-by-id/{id}", method = RequestMethod.POST)
     public ResponseEntity<SaleStaff> saveSaleStaff(@PathVariable("id") String saleStaffId){
         return ResponseEntity.ok(saleStaffService.findSaleStaffById(saleStaffId));

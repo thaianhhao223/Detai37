@@ -36,6 +36,12 @@ public class SaleStaffService {
         return saleStaffList;
     }
 
+    public List<SaleStaff> getAllSaleStaff(){
+
+        List<SaleStaff> saleStaffList = saleStaffRepository.findAll();
+        return saleStaffList;
+    }
+
     public SaleStaff findSaleStaffById(String id){
         Optional<SaleStaff> saleStaffOptional = saleStaffRepository.findById(id);
         SaleStaff saleStaff = null;
