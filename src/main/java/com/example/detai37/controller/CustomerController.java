@@ -32,6 +32,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.saveCustomer(createCustomerRequest));
     }
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<List<Customer>> saveANewCustomer(){
+        return ResponseEntity.ok(customerService.getAllCustommer());
+    }
+
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
     public ResponseEntity<Customer> findById(@PathVariable("id") String id) {
         return ResponseEntity.ok(customerService.findCustomerById(id));

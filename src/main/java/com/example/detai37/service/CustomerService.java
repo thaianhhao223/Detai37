@@ -33,6 +33,11 @@ public class CustomerService {
         return customerList;
     }
 
+    public List<Customer> getAllCustommer(){
+          List<Customer> customerList = customerRepository.findAll();
+        return customerList;
+    }
+
     public Customer findCustomerById(String id){
         Optional<Customer> customerOptional = customerRepository.findById(id);
         Customer customer = null;
