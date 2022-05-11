@@ -2,6 +2,7 @@ package com.example.detai37.entity;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,5 +17,6 @@ public class Account {
     private String userName;
     private String passWord;
     private String userId;
+    @Column(columnDefinition = "NVarchar(50)")
     private String userType;
 }

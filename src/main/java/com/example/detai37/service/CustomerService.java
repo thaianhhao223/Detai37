@@ -42,6 +42,15 @@ public class CustomerService {
         return customer;
     }
 
+    public Customer findCustomerByPhoneNumber(String phoneNumber){
+        Optional<Customer> customerOptional = customerRepository.findCustomerByPhoneNumber(phoneNumber);
+        Customer customer = null;
+        if (customerOptional != null){
+            customer = customerOptional.get();
+        }
+        return customer;
+    }
+
     public Customer saveCustomer(CreateCustomerRequest createCustomerRequest){
         Customer customer = MappingUtils.mapObject(createCustomerRequest, Customer.class);
         customer.setStatus(CustomerStatus.NEW_CUSTOMER);

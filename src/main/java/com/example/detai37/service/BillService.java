@@ -9,16 +9,15 @@ import com.example.detai37.repository.BillRepository;
 import com.example.detai37.request.bill.CreateBillRequest;
 import com.example.detai37.request.bill.SolvePaymentBillRequest;
 import com.example.detai37.request.bill.UpdateBillRequest;
+import com.example.detai37.request.customer.CreateCustomerRequest;
 import com.example.detai37.request.product.UpdateStockProductRequest;
 import com.example.detai37.ultis.PageableUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
 public class BillService {
@@ -34,18 +33,19 @@ public class BillService {
         this.saleStaffService = saleStaffService;
     }
 
-
     public Page<Bill> getAllBillWithPage(BasePageAndSortRequest pageAndSortRequest){
             Pageable pageable = PageableUtils.convertPageableAndSort(pageAndSortRequest.getPageNumber(), pageAndSortRequest.getPageSize(), pageAndSortRequest.getSort());
             Page<Bill> billPage = billRepository.findAll(pageable);
             return billPage;
     }
 
+    @Transactional
     public List<Bill> getAllBill(){
         List<Bill> list = billRepository.findAll();
         return list;
     }
 
+    @Transactional
     public Bill findBillById(String id){
 
         Optional<Bill> billOptional = billRepository.findById(id);
@@ -56,12 +56,16 @@ public class BillService {
         return bill;
     }
 
+    @Transactional
     public Bill saveBill(CreateBillRequest createBillRequest){
+        System.out.println("==========> create bill");
         Bill newBill = new Bill();
-        Customer customer = customerService.findCustomerById(createBillRequest.getCustomerId());
 //        SaleStaff saleStaff = saleStaffService.findSaleStaffById(createBillRequest.getSaleStaffId());
+
+        // product list
         List<ProductSale> productList = new ArrayList<>();
         for(ProductSaleId productId: createBillRequest.getProductSaleIdList()){
+            System.out.println("==========> get product: "+productId.getProductId());
             Product product = productService.findProductById(productId.getProductId());
             ProductSale productSale = ProductSale.builder()
                     .product(product)
@@ -69,19 +73,37 @@ public class BillService {
                     .build();
             productList.add(productSale);
         }
-        Double price = chargeTotal(newBill);
+
+        //save customer
+        Customer customer = customerService.findCustomerByPhoneNumber(createBillRequest.getCustomer().getPhoneNumber());
+        if (customer == null){
+            CreateCustomerRequest createCustomerRequest = CreateCustomerRequest.builder()
+                    .firstName(createBillRequest.getCustomer().getFirstName())
+                    .lastName(createBillRequest.getCustomer().getLastName())
+                    .email(createBillRequest.getCustomer().getEmail())
+                    .phoneNumber(createBillRequest.getCustomer().getPhoneNumber())
+                    .address(createBillRequest.getCustomer().getAddress())
+                    .urlImage("{https://chatappvalo.s3.ap-southeast-1.amazonaws.com/1637245397458_astro.jpg")
+                    .build();
+            customer = customerService.saveCustomer(createCustomerRequest);
+        }
+
         newBill.setCustomer(customer);
 //        newBill.setSaleStaff(saleStaff);
         newBill.setProductList(productList);
         newBill.setDateSale(new Date());
-        newBill.setDateSale(createBillRequest.getDateDelivery());
-        newBill.setTotalPrice(price);
+        newBill.setDateDelivery(createBillRequest.getDateDelivery());
         newBill.setPaymentType(createBillRequest.getPaymentType());
         newBill.setStatus(BillStatus.BILL_UNPAID);
+
+        Double price = chargeTotal(newBill);
+        newBill.setTotalPrice(price);
+
         Bill result = billRepository.save(newBill);
         return result;
     }
 
+    @Transactional
     public Bill updateBill(UpdateBillRequest updateBillRequest){
         Bill newBill = billRepository.getById(updateBillRequest.getBillId());
         Customer customer = customerService.findCustomerById(updateBillRequest.getCustomerId());

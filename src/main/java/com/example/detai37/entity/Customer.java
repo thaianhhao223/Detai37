@@ -25,6 +25,7 @@ public class Customer {
     private String lastName;
     private String email;
     private String phoneNumber;
+    @Column(columnDefinition = "ntext")
     private String address;
     private String urlImage;
     private Integer status;

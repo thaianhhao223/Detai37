@@ -5,7 +5,6 @@ import com.example.detai37.entity.SaleStaff;
 import com.example.detai37.model.ProductSaleId;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
@@ -16,9 +15,8 @@ import java.util.List;
 @Getter
 @Builder
 public class CreateBillRequest {
-    @NotBlank
     @NotNull
-    private String customerId;
+    private Customer customer;
 //    @NotBlank
 //    @NotNull
 //    private String saleStaffId;
