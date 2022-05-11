@@ -36,7 +36,7 @@ public class CustomerService {
     public Customer findCustomerById(String id){
         Optional<Customer> customerOptional = customerRepository.findById(id);
         Customer customer = null;
-        if (customerOptional != null){
+        if (customerOptional.isPresent()){
             customer = customerOptional.get();
         }
         return customer;
@@ -45,7 +45,7 @@ public class CustomerService {
     public Customer findCustomerByPhoneNumber(String phoneNumber){
         Optional<Customer> customerOptional = customerRepository.findCustomerByPhoneNumber(phoneNumber);
         Customer customer = null;
-        if (customerOptional != null){
+        if (customerOptional.isPresent()){
             customer = customerOptional.get();
         }
         return customer;
