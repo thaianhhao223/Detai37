@@ -59,7 +59,7 @@ public class BillService {
     public Bill saveBill(CreateBillRequest createBillRequest){
         Bill newBill = new Bill();
         Customer customer = customerService.findCustomerById(createBillRequest.getCustomerId());
-        SaleStaff saleStaff = saleStaffService.findSaleStaffById(createBillRequest.getSaleStaffId());
+//        SaleStaff saleStaff = saleStaffService.findSaleStaffById(createBillRequest.getSaleStaffId());
         List<ProductSale> productList = new ArrayList<>();
         for(ProductSaleId productId: createBillRequest.getProductSaleIdList()){
             Product product = productService.findProductById(productId.getProductId());
@@ -71,7 +71,7 @@ public class BillService {
         }
         Double price = chargeTotal(newBill);
         newBill.setCustomer(customer);
-        newBill.setSaleStaff(saleStaff);
+//        newBill.setSaleStaff(saleStaff);
         newBill.setProductList(productList);
         newBill.setDateSale(new Date());
         newBill.setDateSale(createBillRequest.getDateDelivery());
@@ -85,7 +85,7 @@ public class BillService {
     public Bill updateBill(UpdateBillRequest updateBillRequest){
         Bill newBill = billRepository.getById(updateBillRequest.getBillId());
         Customer customer = customerService.findCustomerById(updateBillRequest.getCustomerId());
-        SaleStaff saleStaff = saleStaffService.findSaleStaffById(updateBillRequest.getSaleStaffId());
+//        SaleStaff saleStaff = saleStaffService.findSaleStaffById(updateBillRequest.getSaleStaffId());
         List<ProductSale> productList = new ArrayList<>();
         for(ProductSaleId productId: updateBillRequest.getProductSaleIdList()){
             Product product = productService.findProductById(productId.getProductId());
@@ -97,7 +97,7 @@ public class BillService {
         }
         Double price = chargeTotal(newBill);
         newBill.setCustomer(customer);
-        newBill.setSaleStaff(saleStaff);
+//        newBill.setSaleStaff(saleStaff);
         newBill.setProductList(productList);
         newBill.setDateSale(new Date());
         newBill.setDateSale(updateBillRequest.getDateDelivery());

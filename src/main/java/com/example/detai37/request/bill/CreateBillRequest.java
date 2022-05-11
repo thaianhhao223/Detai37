@@ -19,9 +19,9 @@ public class CreateBillRequest {
     @NotBlank
     @NotNull
     private String customerId;
-    @NotBlank
-    @NotNull
-    private String saleStaffId;
+//    @NotBlank
+//    @NotNull
+//    private String saleStaffId;
     @NotNull
     private List<ProductSaleId> productSaleIdList;
     private Date dateDelivery;
