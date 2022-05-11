@@ -100,6 +100,7 @@ public class BillService {
         newBill.setTotalPrice(price);
 
         Bill result = billRepository.save(newBill);
+        calculateQuantity(result);
         return result;
     }
 
