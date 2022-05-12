@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,7 @@ public class CustomerService {
     public Customer saveCustomer(CreateCustomerRequest createCustomerRequest){
         Customer customer = MappingUtils.mapObject(createCustomerRequest, Customer.class);
         customer.setStatus(CustomerStatus.NEW_CUSTOMER);
+        customer.setCreatedDate(new Date());
         Customer result = customerRepository.save(customer);
         return result;
 //        return customer;

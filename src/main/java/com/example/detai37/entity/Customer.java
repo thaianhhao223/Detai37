@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -25,8 +26,10 @@ public class Customer {
     private String lastName;
     private String email;
     private String phoneNumber;
-    @Column(columnDefinition = "ntext")
+    @Column(columnDefinition = "NVarchar(255)")
     private String address;
+    private Date birthDate;
+    private Date createdDate;
     private String urlImage;
     private Integer status;
 }
