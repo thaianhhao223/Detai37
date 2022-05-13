@@ -10,6 +10,8 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-public class ProductPageResponse {
+public class ProductListResponse {
     private List<Product> productList;
+    private int number;
+    private int totalPages;
 }
