@@ -59,8 +59,9 @@ public class CustomerService {
 
     public Customer saveCustomer(CreateCustomerRequest createCustomerRequest){
         Customer customer = MappingUtils.mapObject(createCustomerRequest, Customer.class);
-        customer.setStatus(CustomerStatus.NEW_CUSTOMER);
+//        customer.setStatus(CustomerStatus.NEW_CUSTOMER);
         customer.setCreatedDate(new Date());
+        System.out.println(customer.toString());
         Customer result = customerRepository.save(customer);
         return result;
 //        return customer;
@@ -68,13 +69,14 @@ public class CustomerService {
 
     public Customer updateCustomer(UpdateCustomerRequest updateCustomerRequest){
         Customer customer = MappingUtils.mapObject(updateCustomerRequest, Customer.class);
-        Customer oldCustomer = customerRepository.getById(updateCustomerRequest.getId());
-        if(oldCustomer!=null){
-            customer.setStatus(oldCustomer.getStatus());
-        }
+//        Customer oldCustomer = customerRepository.getById(updateCustomerRequest.getId());
+//        if(oldCustomer!=null){
+//            customer.setStatus(oldCustomer.getStatus());
+//        }
 //        else {
 //            throw new Exception();
 //        }
+        System.out.println(customer.toString());
         Customer result = customerRepository.save(customer);
         return result;
     }

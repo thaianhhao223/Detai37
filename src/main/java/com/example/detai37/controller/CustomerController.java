@@ -42,7 +42,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.findCustomerById(id));
     }
 
-    @RequestMapping(value = "/customer", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Customer updateCustomer(@RequestBody UpdateCustomerRequest updateCustomerRequest){
         Customer result = customerService.updateCustomer(updateCustomerRequest);
         return result;

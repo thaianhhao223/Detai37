@@ -2,11 +2,13 @@ package com.example.detai37.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -15,7 +17,9 @@ import java.util.Date;
 @Setter
 @Getter
 @Builder
-public class Customer {
+@ToString
+public class Customer implements Serializable {
+
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -28,7 +32,9 @@ public class Customer {
     private String phoneNumber;
     @Column(columnDefinition = "NVarchar(255)")
     private String address;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
     private String urlImage;
     private Integer status;

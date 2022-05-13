@@ -5,6 +5,7 @@ import lombok.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +24,6 @@ public class CreateCustomerRequest {
     private String phoneNumber;
     private String address;
     private String urlImage;
+    private Date birthDate;
+    private Integer status;
 }
