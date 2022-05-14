@@ -49,7 +49,7 @@ public class CustomerController {
     }
 
 
-    @RequestMapping(value = "/customer/status", method = RequestMethod.PUT)
+    @RequestMapping(value = "/customer/status", method = RequestMethod.POST)
     public Customer updateStatusCustomer(@RequestBody UpdateStatusCustomerRequest updateStatusCustomerRequest){
         Customer result = customerService.updateStatusCustomer(updateStatusCustomerRequest);
         return result;
