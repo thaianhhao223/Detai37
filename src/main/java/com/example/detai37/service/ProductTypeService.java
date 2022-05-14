@@ -33,6 +33,7 @@ public class ProductTypeService {
 
     public ProductType saveProductType(CreateProductTypeRequest createProductTypeRequest){
         ProductType productType = MappingUtils.mapObject(createProductTypeRequest, ProductType.class);
+        System.out.println(productType.toString());
         ProductType result = productTypeRepository.save(productType);
         return result;
 //        return customer;
