@@ -1,17 +1,12 @@
 package com.example.detai37.controller;
 
-import com.example.detai37.base.request.BasePageAndSortRequest;
 import com.example.detai37.entity.Account;
-import com.example.detai37.entity.Customer;
+import com.example.detai37.request.RegisterRequest;
 import com.example.detai37.request.account.CreateAccountRequest;
 import com.example.detai37.request.account.LoginAccountRequest;
 import com.example.detai37.request.account.UpdateAccountRequest;
-import com.example.detai37.request.customer.CreateCustomerRequest;
-import com.example.detai37.request.customer.UpdateCustomerRequest;
-import com.example.detai37.request.customer.UpdateStatusCustomerRequest;
+import com.example.detai37.response.LoginInfoResponse;
 import com.example.detai37.service.AccountService;
-import com.example.detai37.service.CustomerService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +25,14 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findUserByUserName(userName));
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> loginAccount(@RequestBody LoginAccountRequest loginAccountRequest) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<LoginInfoResponse> loginAccount(@RequestBody LoginAccountRequest loginAccountRequest) {
         return ResponseEntity.ok(accountService.loginAccount(loginAccountRequest));
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ResponseEntity<Account> registration(@RequestBody RegisterRequest registerRequest) {
+        return ResponseEntity.ok(accountService.registration(registerRequest));
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
