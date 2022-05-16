@@ -35,6 +35,11 @@ public class AccountService {
         return account;
     }
 
+    /**
+     * Login to server
+     * @param loginAccountRequest
+     * @return loginInfoResponse
+     */
     public LoginInfoResponse loginAccount(LoginAccountRequest loginAccountRequest){
         Optional<Account> optional = accountRepository.findById(loginAccountRequest.getUserName());
         if (optional.isPresent()){

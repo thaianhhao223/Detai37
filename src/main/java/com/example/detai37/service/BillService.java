@@ -74,21 +74,7 @@ public class BillService {
             productList.add(productSale);
         }
 
-        //save customer
-        Customer customer = customerService.findCustomerByPhoneNumber(createBillRequest.getCustomer().getPhoneNumber());
-        if (customer == null){
-            CreateCustomerRequest createCustomerRequest = CreateCustomerRequest.builder()
-                    .firstName(createBillRequest.getCustomer().getFirstName())
-                    .lastName(createBillRequest.getCustomer().getLastName())
-                    .email(createBillRequest.getCustomer().getEmail())
-                    .phoneNumber(createBillRequest.getCustomer().getPhoneNumber())
-                    .address(createBillRequest.getCustomer().getAddress())
-                    .urlImage("{https://chatappvalo.s3.ap-southeast-1.amazonaws.com/1637245397458_astro.jpg")
-                    .build();
-            customer = customerService.saveCustomer(createCustomerRequest);
-        }
-
-        newBill.setCustomer(customer);
+        newBill.setCustomer(createBillRequest.getCustomer());
 //        newBill.setSaleStaff(saleStaff);
         newBill.setProductList(productList);
         newBill.setDateSale(new Date());
