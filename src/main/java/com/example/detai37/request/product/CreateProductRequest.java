@@ -23,6 +23,7 @@ public class CreateProductRequest {
     @NotNull
     @Size(min = 0)
     private Integer size;
+    private String description;
     @NotNull
     @Size(min = 0)
     private Integer stock; //Số lượng tồn
